@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Automation Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>DevOps Automation Tracking Dashboard</h1>
+
+    <h2>Pipeline Execution Logs</h2>
+    <table>
+        <tr>
+            <th>Task Name</th>
+            <th>Status</th>
+            <th>Execution Time (seconds)</th>
+        </tr>
+        {% for task in tasks %}
+        <tr class="{% if task.status == 'Failed' %}failed{% else %}success{% endif %}">
+            <td>{{ task.task }}</td>
+            <td>{{ task.status }}</td>
+            <td>{{ task.time }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Effectiveness Metrics</h2>
+    <table>
+        <tr>
+            <th>Metric</th>
+            <th>Value</th>
+        </tr>
+        {% for key, value in effectiveness.items() %}
+        <tr>
+            <td>{{ key }}</td>
+            <td>{{ value }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
